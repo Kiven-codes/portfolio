@@ -1,0 +1,391 @@
+/* Theme variables */
+:root {
+  --bg-1: #0f1724;
+  --bg-2: #071020;
+  --glass: rgba(255, 255, 255, 0.06);
+  --accent-1: #6ee7b7;
+  --accent-2: #60a5fa;
+  --muted: #a3b2c7;
+  --card: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --radius: 14px;
+  --max-width: 1000px;
+  --ease: cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+/* Base */
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background: linear-gradient(160deg, var(--bg-1) 0%, var(--bg-2) 100%);
+  color: #e6eef8;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* decorative floating blurred circles */
+.decorative-circle {
+  position: fixed;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  filter: blur(40px) saturate(120%);
+  opacity: 0.75;
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  mix-blend-mode: screen;
+  animation: float 8s var(--ease) infinite;
+}
+.circle-1 {
+  right: -120px;
+  top: -80px;
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(110, 231, 183, 0.85),
+    transparent 45%
+  );
+  animation-duration: 10s;
+}
+.circle-2 {
+  left: -140px;
+  bottom: -120px;
+  background: radial-gradient(
+    circle at 70% 70%,
+    rgba(96, 165, 250, 0.85),
+    transparent 40%
+  );
+  animation-duration: 12s;
+  animation-direction: reverse;
+}
+@keyframes float {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-24px) scale(1.02);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Center container */
+.container {
+  max-width: var(--max-width);
+  margin: 6vh auto;
+  padding: clamp(18px, 3.4vw, 36px);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+  border-radius: calc(var(--radius) + 6px);
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(8px) saturate(120%);
+  animation: containerIn 0.7s var(--ease);
+}
+
+/* entrance */
+@keyframes containerIn {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Header */
+header {
+  text-align: center;
+  margin-bottom: 22px;
+  position: relative;
+}
+.name-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+/* Note: HTML had a typo class="profile=container". We support the corrected class .profile-container and also the literal .profile=container for safety. */
+.profile-container,
+.profile-container {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-direction: column;
+}
+
+.profile-image {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 6px 20px rgba(2, 6, 23, 0.6), 0 0 0 6px rgba(96, 165, 250, 0.04);
+  transform-origin: center;
+  transition: transform 0.45s var(--ease), box-shadow 0.35s var(--ease);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(0, 0, 0, 0.15)
+  );
+}
+
+/* Subtle hover/pulse on image */
+.profile-image:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 20px 40px rgba(2, 6, 23, 0.5),
+    0 0 0 10px rgba(96, 165, 250, 0.06);
+}
+
+/* Name and subtitle */
+header h1 {
+  margin: 0;
+  font-size: clamp(1.2rem, 2.6vw, 1.75rem);
+  letter-spacing: -0.01em;
+  font-weight: 700;
+}
+.subtitle {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* Links row */
+.links {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+.links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: #021123;
+  font-weight: 600;
+  font-size: 0.92rem;
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.5);
+  transform: translateZ(0);
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease),
+    filter 0.25s linear;
+}
+.links a:hover,
+.links a:focus {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(2, 6, 23, 0.55);
+  filter: brightness(1.03);
+}
+.links a:focus {
+  outline: 3px solid rgba(96, 165, 250, 0.18);
+  outline-offset: 4px;
+}
+
+/* Sections */
+section {
+  margin-top: 22px;
+}
+section h2 {
+  margin: 0 0 10px 0;
+  font-size: 1.05rem;
+  color: #dfeaf6;
+  letter-spacing: 0.6px;
+}
+
+/* About */
+.about-text {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.01), transparent);
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+/* Projects grid */
+.project {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), var(--card));
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 12px;
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.02);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+  transform-origin: center;
+  position: relative;
+  overflow: hidden;
+}
+.project + .project {
+  margin-top: 12px;
+}
+
+/* create subtle gradient accent bar */
+.project::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: linear-gradient(
+    180deg,
+    rgba(110, 231, 183, 0.9),
+    rgba(96, 165, 250, 0.9)
+  );
+  transform: scaleY(1);
+  transition: transform 0.45s var(--ease);
+}
+.project:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 26px 60px rgba(2, 6, 23, 0.6);
+}
+.project:hover::before {
+  transform: scaleY(1.05);
+}
+
+/* Project link button with animated arrow / .project-link{ display:inline-grid; grid-auto-flow:column; gap:10px; place-items:center; margin-top:12px; padding:9px 14px; border-radius:10px; text-decoration:none; color:#021123; font-weight:700; background: linear-gradient(90deg, rgba(96,165,250,0.98), rgba(110,231,183,0.95)); box-shadow: 0 10px 30px rgba(96,165,250,0.12); transition: transform .35s var(--ease), box-shadow .35s var(--ease); position:relative; overflow:visible; } / arrow animation inside button */
+.project-link .arrow {
+  display: inline-block;
+  transition: transform 0.35s var(--ease);
+}
+.project-link:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 26px 50px rgba(96, 165, 250, 0.12);
+}
+.project-link:hover .arrow {
+  transform: translateX(6px);
+}
+
+/* small techy detail: faint animated shine */
+.project-link::after {
+  content: "";
+  position: absolute;
+  left: -40%;
+  top: -40%;
+  width: 60%;
+  height: 220%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0)
+  );
+  transform: rotate(25deg);
+  transition: transform 0.8s var(--ease), opacity 0.4s;
+  opacity: 0;
+}
+.project-link:hover::after {
+  transform: translateX(170%);
+  opacity: 0.45;
+}
+
+/* Footer */
+footer {
+  margin-top: 28px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.02);
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+/* Responsive grid for projects on larger screens / @media (min-width:720px){ .container{ padding: clamp(22px, 3.8vw, 48px) } / two-column for projects */
+section:nth-of-type(2) {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+.project {
+  margin-top: 0;
+}
+
+/* desktop layout tweaks */
+@media (min-width: 1000px) {
+  header {
+    text-align: left;
+  }
+  .name-wrapper {
+    justify-content: flex-start;
+  }
+  .profile-container,
+  .profile-container {
+    flex-direction: row;
+  }
+  header h1 {
+    font-size: clamp(1.6rem, 2.2vw, 2rem);
+  }
+  .links {
+    justify-content: flex-start;
+  }
+  section:nth-of-type(2) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* small screens */
+@media (max-width: 420px) {
+  .profile-image {
+    width: 86px;
+    height: 86px;
+  }
+  .project {
+    padding: 12px;
+  }
+  .links a {
+    padding: 7px 10px;
+    font-size: 0.86rem;
+  }
+}
+
+/* small utility */
+.hidden {
+  display: none !important;
+}
+
+/* ...existing code... */
+.contact-form {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 420px;
+}
+.contact-form input,
+.contact-form textarea {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+.contact-form button {
+  padding: 10px 14px;
+  background: #0b5fff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#form-status {
+  font-size: 13px;
+  color: #333;
+  margin-top: 6px;
+}
